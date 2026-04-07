@@ -38,7 +38,7 @@ Session 2 (next day):
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The agent implements a **three-step PAHF loop** as a LangGraph state machine:
 
@@ -66,10 +66,10 @@ User Message
 │  Ask   │ │ Reason &    │◄──────┐
 │  User  │ │ Act (ReAct) │       │
 └───┬────┘ └──────┬──────┘       │
-    │             │               │
-    ▼        Tool call?           │
+    │             │              │
+    ▼        Tool call?          │
   [END]      │       │           │
-  (wait)   YES      NO          │
+  (wait)   YES      NO           │
              │       │           │
              ▼       │           │
           ┌──────┐   │           │
@@ -98,7 +98,7 @@ User Message
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 stock-watchlist-agent/
@@ -138,7 +138,7 @@ stock-watchlist-agent/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -228,7 +228,7 @@ The PAHF paper proves mathematically that **both channels together** outperform 
 
 ---
 
-## 📊 Metrics
+##  Metrics
 
 Following the PAHF paper, we track three metrics:
 
@@ -252,7 +252,7 @@ MAX_PERSONAS_FOR_EVAL = 5         # Number of test personas
 
 ---
 
-## 🗺️ Roadmap
+##  Roadmap
 
 - [ ] Add more investor personas (target: 20) for robust evaluation
 - [ ] Implement drift detection using change-point algorithms on memory embeddings
@@ -291,7 +291,7 @@ Built on Meta's PAHF framework, combining LLM-based agents, persistent per-user 
 
 ---
 
-## 🎯 What It Does
+## What It Does
 
 - **Remembers you**: Stores your investment interests, holdings, risk tolerance, and sector preferences across sessions using Mem0 persistent memory
 - **Learns gradually**: Extracts preferences from natural conversation — no forms or setup wizards
@@ -319,7 +319,7 @@ Session 2 (next day):
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The agent implements a **three-step PAHF loop** as a LangGraph state machine:
 
@@ -347,10 +347,10 @@ User Message
 │  Ask   │ │ Reason &    │◄──────┐
 │  User  │ │ Act (ReAct) │       │
 └───┬────┘ └──────┬──────┘       │
-    │             │               │
-    ▼        Tool call?           │
+    │             │              │
+    ▼        Tool call?          │
   [END]      │       │           │
-  (wait)   YES      NO          │
+  (wait)   YES      NO           │
              │       │           │
              ▼       │           │
           ┌──────┐   │           │
@@ -359,7 +359,7 @@ User Message
                    │
                    ▼
           ┌──────────────────┐
-          │ Process Feedback  │ ← Extract new preferences, update Mem0
+          │ Process Feedback │ ← Extract new preferences, update Mem0
           └────────┬─────────┘
                    │
                    ▼
@@ -379,7 +379,7 @@ User Message
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 stock-watchlist-agent/
@@ -453,14 +453,6 @@ python app.py
 
 Opens a Gradio chat interface at `http://localhost:7860`. Start chatting — the agent will learn your preferences automatically.
 
-### Run Evaluation (Optional)
-
-```bash
-python -m evaluation.run_eval
-```
-
-Runs the full PAHF 4-phase protocol with 5 synthetic investor personas across 15 scenarios each.
-
 ---
 
 ## 🧠 How the PAHF Framework Works
@@ -482,20 +474,9 @@ This project implements the Meta PAHF paper which introduced a three-step loop f
 | Pre-action (asking first) | Cold start — new user with no data | "Which sectors interest you?" |
 | Post-action (learning from reactions) | Preference drift — outdated memory | User: "Actually I'm into biotech now" |
 
-The PAHF paper proves mathematically that **both channels together** outperform either alone.
-
-### 4-Phase Evaluation Protocol
-
-| Phase | Personas | Feedback | Tests |
-|-------|----------|----------|-------|
-| Phase 1 | Original | ON | Can the agent learn from scratch? |
-| Phase 2 | Original | OFF | Can it use what it learned on new scenarios? |
-| Phase 3 | Evolved (shifted) | ON | Can it detect and adapt to preference changes? |
-| Phase 4 | Evolved (shifted) | OFF | Did it actually update its memory correctly? |
-
 ---
 
-## 💰 Cost
+##  Cost
 
 | Component | Cost |
 |-----------|------|
@@ -507,17 +488,6 @@ The PAHF paper proves mathematically that **both channels together** outperform 
 | **Typical dev session** | **~$0.05 - $0.20** |
 | **Full evaluation run** | **~$8 - $15** |
 
----
-
-## 📊 Metrics
-
-Following the PAHF paper, we track three metrics:
-
-- **Success Rate (SR)**: Fraction of responses that were relevant to the user's actual preferences
-- **Feedback Frequency (FF)**: How often feedback was needed (should decrease as agent learns)
-- **ACPE (Average Cumulative Personalization Error)**: Tracks learning speed over iterations — a steeply declining ACPE means the agent is learning fast
-
----
 
 ## 🔧 Configuration
 
@@ -533,18 +503,6 @@ MAX_PERSONAS_FOR_EVAL = 5         # Number of test personas
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] Add more investor personas (target: 20) for robust evaluation
-- [ ] Implement drift detection using change-point algorithms on memory embeddings
-- [ ] Add layered memory (working/episodic/semantic) with proper scope management
-- [ ] Build SEC EDGAR integration for earnings and filing alerts
-- [ ] Add portfolio tracking with performance attribution
-- [ ] Human evaluation study via Gradio
-- [ ] Publish evaluation results and benchmark
-
----
-
 ## 📚 References
 
 - **PAHF Paper**: Liang et al., "Learning Personalized Agents from Human Feedback", arXiv:2602.16173, Feb 2026. [Paper](https://arxiv.org/abs/2602.16173)
@@ -554,7 +512,7 @@ MAX_PERSONAS_FOR_EVAL = 5         # Number of test personas
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Meta's PAHF team for the continual personalization framework
 - Mem0 team for the open-source memory layer
