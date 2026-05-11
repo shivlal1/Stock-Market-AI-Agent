@@ -172,10 +172,6 @@ python app.py
 
 Opens a Gradio chat interface at `http://localhost:7860`. Start chatting — the agent will learn your preferences automatically.
 
-### Run Evaluation (Optional)
-
-```bash
-python -m evaluation.run_eval
 ```
 
 Runs the full PAHF 4-phase protocol with 5 synthetic investor personas across 15 scenarios each.
@@ -225,17 +221,6 @@ The PAHF paper proves mathematically that **both channels together** outperform 
 | ChromaDB | Free |
 | **Typical dev session** | **~$0.05 - $0.20** |
 | **Full evaluation run** | **~$8 - $15** |
-
----
-
-##  Metrics
-
-Following the PAHF paper, we track three metrics:
-
-- **Success Rate (SR)**: Fraction of responses that were relevant to the user's actual preferences
-- **Feedback Frequency (FF)**: How often feedback was needed (should decrease as agent learns)
-- **ACPE (Average Cumulative Personalization Error)**: Tracks learning speed over iterations — a steeply declining ACPE means the agent is learning fast
-
 ---
 
 ## 🔧 Configuration
@@ -252,17 +237,6 @@ MAX_PERSONAS_FOR_EVAL = 5         # Number of test personas
 
 ---
 
-##  Roadmap
-
-- [ ] Add more investor personas (target: 20) for robust evaluation
-- [ ] Implement drift detection using change-point algorithms on memory embeddings
-- [ ] Add layered memory (working/episodic/semantic) with proper scope management
-- [ ] Build SEC EDGAR integration for earnings and filing alerts
-- [ ] Add portfolio tracking with performance attribution
-- [ ] Human evaluation study via Gradio
-- [ ] Publish evaluation results and benchmark
-
----
 
 ## 📚 References
 
