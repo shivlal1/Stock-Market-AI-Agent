@@ -13,9 +13,6 @@ from tools.news import fetch_financial_news, get_sector_overview
 ALL_TOOLS = [
     get_stock_price,
     get_portfolio_summary,
-    fetch_financial_news,
-    get_sector_overview,
 ]
 
-__all__ = ["ALL_TOOLS", "get_stock_price", "get_portfolio_summary",
-           "fetch_financial_news", "get_sector_overview"]
+__all__ = ["ALL_TOOLS", "get_stock_price", "get_portfolio_summary"]
