@@ -94,7 +94,6 @@ User Message
 | Stock Data | yfinance | Real-time prices, fundamentals, sector ETFs |
 | News | RSS feeds (Reuters, MarketWatch, CNBC) | Financial news headlines |
 | UI | Gradio | Chat interface with memory inspector |
-| Evaluation | Custom PAHF 4-phase protocol | Automated testing with simulated users |
 
 ---
 
@@ -128,12 +127,6 @@ stock-watchlist-agent/
 │   ├── __init__.py
 │   ├── profiles.py               # 5 investor personas + evolved versions
 │   └── simulator.py              # LLM-based human simulator
-│
-└── evaluation/                   # PAHF 4-phase testing
-    ├── __init__.py
-    ├── scenarios.py              # Test queries
-    ├── metrics.py                # SR, FF, ACPE calculations
-    └── run_eval.py               # Full evaluation runner
 ```
 
 ---
@@ -190,77 +183,6 @@ This project implements the [PAHF paper](https://arxiv.org/abs/2602.16173) (Meta
 
 3. **Post-Action Feedback Integration**: After responding, the agent analyzes the user's reply for new preference signals ("I don't care about crypto", "I sold GOOGL") and stores them in memory automatically.
 
-### Why Both Feedback Channels Matter
 
-| Channel | Solves | Example |
-|---------|--------|---------|
-| Pre-action (asking first) | Cold start — new user with no data | "Which sectors interest you?" |
-| Post-action (learning from reactions) | Preference drift — outdated memory | User: "Actually I'm into biotech now" |
-
-The PAHF paper proves mathematically that **both channels together** outperform either alone.
-
-### 4-Phase Evaluation Protocol
-
-| Phase | Personas | Feedback | Tests |
-|-------|----------|----------|-------|
-| Phase 1 | Original | ON | Can the agent learn from scratch? |
-| Phase 2 | Original | OFF | Can it use what it learned on new scenarios? |
-| Phase 3 | Evolved (shifted) | ON | Can it detect and adapt to preference changes? |
-| Phase 4 | Evolved (shifted) | OFF | Did it actually update its memory correctly? |
-
----
-
-## 💰 Cost
-
-| Component | Cost |
-|-----------|------|
-| GPT-4o-mini (reasoning + memory) | ~$0.15/1M input, $0.60/1M output tokens |
-| yfinance | Free |
-| RSS news feeds | Free |
-| Mem0 open-source | Free |
-| ChromaDB | Free |
-| **Typical dev session** | **~$0.05 - $0.20** |
-| **Full evaluation run** | **~$8 - $15** |
----
-
-## 🔧 Configuration
-
-Edit `config.py` to customize:
-
-```python
-AGENT_MODEL = "gpt-4o-mini"       # LLM for reasoning (swap for gpt-4o for better quality)
-TEMPERATURE = 0.2                  # Lower = more deterministic
-MEMORY_SEARCH_LIMIT = 8           # Max memories retrieved per query
-LEARNING_ITERATIONS = 3           # Evaluation iterations per phase
-MAX_PERSONAS_FOR_EVAL = 5         # Number of test personas
-```
-
----
-
-
-## 📚 References
-
-- **PAHF Paper**: Liang et al., "Learning Personalized Agents from Human Feedback", arXiv:2602.16173, Feb 2026. [Paper](https://arxiv.org/abs/2602.16173) | [Code](https://github.com/facebookresearch/PAHF) | [Project Page](https://personalized-ai.github.io/)
-- **Mem0**: Chhikara et al., "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory", arXiv:2504.19413, 2025. [GitHub](https://github.com/mem0ai/mem0)
-- **LangGraph**: LangChain's agent orchestration framework. [Docs](https://www.langchain.com/langgraph)
-- **ReAct**: Yao et al., "ReAct: Synergizing Reasoning and Acting in Language Models", ICLR 2023.
-
----
-
-## 🙏 Acknowledgments
-
-- Meta's PAHF team for the continual personalization framework
-- Mem0 team for the open-source memory layer
-- LangChain team for LangGraph
-- yfinance for free market data access# 📈 Personalized Stock Watchlist Agent
-
-A conversational AI financial research assistant that **learns your investment preferences through conversation** and delivers personalized market updates, news, and portfolio insights — improving over every interaction.
-
-Built on Meta's PAHF framework, combining LLM-based agents, persistent per-user memory, and dual feedback channels for continual personalization.
-
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![LangGraph](https://img.shields.io/badge/LangGraph-0.2+-green)
-![Mem0](https://img.shields.io/badge/Mem0-1.0+-purple)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ---
